@@ -18,7 +18,7 @@ instant prediction.
 ## How to Run
 
 1. Clone the repo
-   git clone https://github.com/aashu-exe/heart-attack-prediction
+   git clone https://github.com/aashu-exe/Heart-attack-detection
    cd heart-attack-prediction
 
 2. Install dependencies
