@@ -26,13 +26,14 @@ print("First patients faetures before were raw numbers")
 print("First patients features now: ", X_train[0])
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
 
-model = LogisticRegression(max_iter=1000)
+# model = LogisticRegression(max_iter=1000)
+model = KNeighborsClassifier(n_neighbors=5)
 
 model = model.fit(X_train, Y_train)
 
 print("Model training completed.")
-print("No. of iterations: ", model.n_iter_)
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 Y_pred = model.predict(X_test)
@@ -54,6 +55,8 @@ import os
 os.makedirs("model", exist_ok=True)
 joblib.dump(model, "model/heart_model.pkl")
 joblib.dump(scaler, "model/scaler.pkl")
+joblib.dump(X.columns.tolist(), "model/columns.pkl")
 
 print("Model saved to model/heart_model.pkl")
 print("Scaler saved to model/scaler.pkl")
+print("Columns saved to model/columns.pkl")
