@@ -1,17 +1,21 @@
 import gradio as gr
 import joblib
 import numpy as np
+import pandas as pd
 
 model = joblib.load("model/heart_model.pkl")
 scaler = joblib.load("model/scaler.pkl")
+columns = joblib.load("model/columns.pkl")
 
 def predict_heart_attack(age, sex, cp, trestbps, chol,
                           fbs, restecg, thalach, exang,
                           oldpeak, slope, ca, thal):
 
-    features = np.array([[age, sex, cp, trestbps, chol,
-                           fbs, restecg, thalach, exang,
-                           oldpeak, slope, ca, thal]])
+    # Construct DataFrame with the correct column/feature names
+    features = pd.DataFrame([[age, sex, cp, trestbps, chol,
+                              fbs, restecg, thalach, exang,
+                              oldpeak, slope, ca, thal]], 
+                            columns=columns)
 
     features_scaled = scaler.transform(features)
     prediction = model.predict(features_scaled)[0]
